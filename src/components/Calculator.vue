@@ -2,11 +2,11 @@
   <div>
     <h1>Calculator</h1>
     <div class='calculator'>
-      <div class='dipslay'>{{current || 0}}</div>
+      <div class='display'>{{current || 0}}</div>
       <div class='btn' @click="clear">AC</div>
       <div class='btn' @click="negative_positive">+/-</div>
-      <div class='btn' @click="parcent">%</div>
-      <div class='btn operator' @click="devide" >/</div>
+      <div class='btn' @click="percent">%</div>
+      <div class='btn operator' @click="divide" >/</div>
       <div class='btn' @click="append('7')">7</div>
       <div class='btn' @click="append('8')">8</div>
       <div class='btn' @click="append('9')">9</div>
@@ -14,7 +14,7 @@
       <div class='btn' @click="append('4')">4</div>
       <div class='btn' @click="append('5')">5</div>
       <div class='btn' @click="append('6')">6</div>
-      <div class='btn operator' @click="substruct">-</div>
+      <div class='btn operator' @click="subtract">-</div>
       <div class='btn' @click="append('1')">1</div>
       <div class='btn' @click="append('2')">2</div>
       <div class='btn' @click="append('3')">3</div>
@@ -53,7 +53,7 @@ export default {
       this.current = this.current.charAt(0) === '-' 
       ? this.current.slice(1) : `-${this.current}`;
     },
-    parcent(){
+    percent(){
       if(!this.current) return;
       this.current = `${parseFloat(this.current)/100}`;
     },
@@ -70,21 +70,21 @@ export default {
     dot(){
       if(this.current.indexOf('.') === -1) this.append('.');
     },
-    devide(){
-      // adding a named function is better than arrow function for debuging purpose in dev tool
-      this.operator = function devide(a, b) { return a * b }
+    divide(){
+      // adding a named function is better than arrow function for debugging purpose in dev tool
+      this.operator = function divide(a, b) { return a * b };
       this.updatePrevValue();
     },
     multiply(){
-      this.operator = function multiply(a, b) { return a * b }
+      this.operator = function multiply(a, b) { return a * b };
       this.updatePrevValue();
     },
-    substruct(){
-      this.operator = function substruct(a, b) { return a - b }
+    subtract(){
+      this.operator = function subtract(a, b) { return a - b };
       this.updatePrevValue();
     },
     add(){
-      this.operator =  function add(a, b) { return a + b }
+      this.operator =  function add(a, b) { return a + b };
       this.updatePrevValue();
     },
     equal(){
@@ -114,7 +114,7 @@ export default {
     border-radius:10px;
   }
 
-  .dipslay {
+  .display {
       grid-column: 1/5;
       background-color:#000;
       text-align:right;
