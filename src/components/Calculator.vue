@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Say Hello to Vue Calculator</h1>
+    <h1>Calculator</h1>
     <div class='calculator'>
       <div class='dipslay'>{{current || 0}}</div>
       <div class='btn' @click="clear">AC</div>
@@ -21,8 +21,12 @@
       <div class='btn operator' @click="add">+</div>
       <div class='btn zero' @click="append('0')">0</div>
       <div class='btn' @click="dot">.</div>
-      <div class='btn operator' >=</div>
+      <div class='btn operator' @click="equal">=</div>
     </div>
+    <footer>
+      <p>Created with love and Vue</p>
+      <p>&copy;2018 Kamal Ahmed</p>
+    </footer>
 
   </div>
 </template>
@@ -31,12 +35,19 @@
 export default {
   data(){
     return {
+      previous: null,
       current: '',
+      operator: null,
+      operatorClicked: false,
     }
   },
   methods:{
     clear(){
-      this.current = '';
+      this.previous         = null;
+      this.current          = '';
+      this.operator         = null;
+      this.operatorClicked  = false;
+      
     },
     negative_positive(){
       this.current = this.current.charAt(0) === '-' 
@@ -47,31 +58,45 @@ export default {
       this.current = `${parseFloat(this.current)/100}`;
     },
     append(str){
+      if(this.operatorClicked){
+        this.current = '';
+        this.operatorClicked = false;
+      }
+      if(str === '0'){
+        if(this.current === '') return; // do not add zero if there are no number in the display
+      }
       this.current = `${this.current}${str}`;
     },
     dot(){
       if(this.current.indexOf('.') === -1) this.append('.');
     },
     devide(){
-
+      // adding a named function is better than arrow function for debuging purpose in dev tool
+      this.operator = function devide(a, b) { return a * b }
+      this.updatePrevValue();
     },
     multiply(){
-
+      this.operator = function multiply(a, b) { return a * b }
+      this.updatePrevValue();
     },
     substruct(){
-
+      this.operator = function substruct(a, b) { return a - b }
+      this.updatePrevValue();
     },
     add(){
-
+      this.operator =  function add(a, b) { return a + b }
+      this.updatePrevValue();
     },
+    equal(){
+      this.current = `${this.operator(parseFloat(this.previous), parseFloat(this.current))}`;
+    },
+    updatePrevValue(){
+      this.previous = this.current;
+      this.operatorClicked = true;
+    }
   }
 }
 </script>
-
-
-
-
-
 
 
 
@@ -91,7 +116,7 @@ export default {
 
   .dipslay {
       grid-column: 1/5;
-      background-color:#938479;
+      background-color:#000;
       text-align:right;
       padding:20px 20px 10px;
       font-size: 50px;

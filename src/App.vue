@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Calculator message='Welcome to Awesome Vuetify Calculator'/>
+    <Calculator/>
   </div>
 </template>
 
