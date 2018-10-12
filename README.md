@@ -4,6 +4,8 @@
 
 ## Live Demo
 [Checkout Live Demo](https://calculator-made-with-vue.herokuapp.com/)
+
+[Backup Demo: Click here if the first demo does not work](https://cocky-ride-e4ab52.netlify.com/)
 ## Project setup
 ```
 npm install
