@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Calculator msg="Welcome to My Calculator App"/>
+    <Calculator message='Welcome to Awesome Vuetify Calculator'/>
   </div>
 </template>
 
